@@ -20,6 +20,14 @@ public class QRequestInterceptor {
      */
     @ServerRequestFilter
     public void asyncLog(HttpServerRequest request) {
-        request.body().onComplete(event -> log.debug(event.result().toString()));   
+        if (log.isDebugEnabled()) {
+            final var requestUri = request.uri();
+            final var requestBody = request.body();
+            requestBody.onComplete(event -> log.debug("Request {}:\n{}",
+                requestUri,
+                event.result()
+                    .toJsonObject()
+                    .encodePrettily()));   
+        }
     }
 }
