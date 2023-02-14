@@ -1,0 +1,15 @@
+[14/02/2023 14:48:51.327 executor-thread-0] ERROR br.io.otojunior.controller.QuarkusSampleController.hello():19: Mensagem ERRO de exemplo
+[14/02/2023 14:48:51.330 executor-thread-0] WARN  br.io.otojunior.controller.QuarkusSampleController.hello():20: Mensagem AVISO de exemplo
+[14/02/2023 14:48:51.332 executor-thread-0] INFO  br.io.otojunior.controller.QuarkusSampleController.hello():21: Mensagem INFO de exemplo
+[14/02/2023 14:48:51.333 executor-thread-0] DEBUG br.io.otojunior.controller.QuarkusSampleController.hello():22: Mensagem DEBUG de exemplo
+[14/02/2023 14:48:51.333 executor-thread-0] TRACE br.io.otojunior.controller.QuarkusSampleController.hello():23: Mensagem TRACE de exemplo
+[14/02/2023 14:48:55.092 executor-thread-0] ERROR br.io.otojunior.controller.QuarkusSampleController.hello():19: Mensagem ERRO de exemplo
+[14/02/2023 14:48:55.098 executor-thread-0] WARN  br.io.otojunior.controller.QuarkusSampleController.hello():20: Mensagem AVISO de exemplo
+[14/02/2023 14:48:55.099 executor-thread-0] INFO  br.io.otojunior.controller.QuarkusSampleController.hello():21: Mensagem INFO de exemplo
+[14/02/2023 14:48:55.100 executor-thread-0] DEBUG br.io.otojunior.controller.QuarkusSampleController.hello():22: Mensagem DEBUG de exemplo
+[14/02/2023 14:48:55.100 executor-thread-0] TRACE br.io.otojunior.controller.QuarkusSampleController.hello():23: Mensagem TRACE de exemplo
+[14/02/2023 14:48:56.199 executor-thread-0] ERROR br.io.otojunior.controller.QuarkusSampleController.hello():19: Mensagem ERRO de exemplo
+[14/02/2023 14:48:56.199 executor-thread-0] WARN  br.io.otojunior.controller.QuarkusSampleController.hello():20: Mensagem AVISO de exemplo
+[14/02/2023 14:48:56.201 executor-thread-0] INFO  br.io.otojunior.controller.QuarkusSampleController.hello():21: Mensagem INFO de exemplo
+[14/02/2023 14:48:56.201 executor-thread-0] DEBUG br.io.otojunior.controller.QuarkusSampleController.hello():22: Mensagem DEBUG de exemplo
+[14/02/2023 14:48:56.201 executor-thread-0] TRACE br.io.otojunior.controller.QuarkusSampleController.hello():23: Mensagem TRACE de exemplo
