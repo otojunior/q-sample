@@ -19,7 +19,7 @@ public class QSampleApplication implements QuarkusApplication {
      */
     @Override
     public int run(String... args) throws Exception {
-        log.debug("Aplicação Quarkus iniciada");
+        log.debug("APP QUARKUS INICIADA!");
         Quarkus.waitForExit();
         return 0;
     }
