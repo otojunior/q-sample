@@ -1,61 +1,53 @@
-# q-sample
+# Quarkus Reactive SQL
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+## Comandos do Docker:
 
-If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
+### Servidor PostgreSQL
 
-## Running the application in dev mode
+docker run -d --name postgresql --net rede1 --hostname postgresql.docker -e POSTGRES_PASSWORD=senha -p 5432:5432 postgres:alpine
 
-You can run your application in dev mode that enables live coding using:
-```shell script
-./mvnw compile quarkus:dev
+### Cliente PostgreSQL
+
+docker run -it --rm --net rede1 postgres:alpine psql -h postgresql -U quarkus -d quarkus
+
+## Comandos do PostgreSQL:
+
+### Criação de Usuário
+
+```
+CREATE USER QUARKUS WITH
+LOGIN
+PASSWORD 'senha@quarkus';
 ```
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.
+### Criação de Database
 
-## Packaging and running the application
-
-The application can be packaged using:
-```shell script
-./mvnw package
 ```
-It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
-
-The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
-
-If you want to build an _über-jar_, execute the following command:
-```shell script
-./mvnw package -Dquarkus.package.type=uber-jar
+CREATE DATABASE QUARKUS WITH
+OWNER=QUARKUS
+ENCODING=UTF8;
 ```
 
-The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
+### Criação de Tabela
 
-## Creating a native executable
-
-You can create a native executable using: 
-```shell script
-./mvnw package -Pnative
+```
+CREATE TABLE TESTE AS
+SELECT
+  GENERATE_SERIES AS ID,
+  'nome' || GENERATE_SERIES AS NOME
+FROM GENERATE_SERIES(1,5);
 ```
 
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using: 
-```shell script
-./mvnw package -Pnative -Dquarkus.native.container-build=true
+### Alteração de Owner
+
+```
+ALTER TABLE TESTE OWNER TO QUARKUS;
 ```
 
-You can then execute your native executable with: `./target/q-sample-1.0.0-SNAPSHOT-runner`
+### Drop dos Objetos
 
-If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.
-
-## Related Guides
-
-- Micrometer Registry Prometheus ([guide](https://quarkus.io/guides/micrometer)): Enable Prometheus support for Micrometer
-- SmallRye OpenAPI ([guide](https://quarkus.io/guides/openapi-swaggerui)): Document your REST APIs with OpenAPI - comes with Swagger UI
-
-## Provided Code
-
-### RESTEasy Reactive
-
-Easily start your Reactive RESTful Web Services
-
-[Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
+```
+DROP TABLE TESTE;
+DROP DATABASE QUARKUS;
+DROP USER QUARKUS;
+```
