@@ -24,33 +24,7 @@ public class QSampleApplication implements QuarkusApplication {
     @Override
     public int run(String... args) throws Exception {
         log.debug("App Quarkus iniciada");
-        
-		Uni.createFrom()
-    		.item(() -> {
-    			log.debug("Antes do processamento demorado");
-    			simularProcessamentoDemorado();
-    			log.debug("Depois do processamento demorado");
-	        	return ObjectUtils.NULL;
-	        })
-    		.runSubscriptionOn(Infrastructure.getDefaultExecutor())
-			.subscribe()
-			.with(item -> {});
-		
-        log.debug("Mensagem de debug da thread principal 1");
-        log.debug("Mensagem de debug da thread principal 2");
-        log.debug("Mensagem de debug da thread principal 3");
-        
         Quarkus.waitForExit();
         return 0;
-    }
-    
-    /**
-     * 
-     * @param n
-     * @throws InterruptedException 
-     */
-    private final void simularProcessamentoDemorado() {
-        try { Thread.sleep(5000); }
-        catch (InterruptedException e) { log.error(e.getMessage()); }
     }
 }
