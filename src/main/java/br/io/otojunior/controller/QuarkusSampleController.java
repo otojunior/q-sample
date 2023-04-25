@@ -5,15 +5,32 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-@Path("/hello")
+import org.jboss.resteasy.reactive.RestPath;
+
+import io.smallrye.common.annotation.Blocking;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@Path("/")
 public class QuarkusSampleController {
     /**
      * 
      * @return
      */
     @GET
+    @Path("/{n}")
     @Produces(MediaType.TEXT_PLAIN)
-    public String hello() {
-        return "Hello from RESTEasy Reactive";
+    @Blocking
+    public String hello(@RestPath final int n) {
+    	try {
+    		log.info("INICIO");
+    		Thread.sleep(n);
+    		log.info("FIM");
+		}
+    	catch (InterruptedException e) {
+    		log.error(e.getMessage());
+		}
+    	
+        return "Processado: " + n + System.lineSeparator();
     }
 }
