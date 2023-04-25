@@ -10,8 +10,10 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.ObjectUtils.Null;
 import org.eclipse.microprofile.context.ManagedExecutor;
 
+import io.smallrye.common.annotation.NonBlocking;
 import io.smallrye.mutiny.Uni;
 import io.smallrye.mutiny.infrastructure.Infrastructure;
+import io.vertx.mutiny.core.Vertx;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -77,13 +79,62 @@ public class QuarkusSampleController {
     
     /**
      * 
+     * @return
+     */
+    @GET
+    @Path("/async-vertx")
+    @Produces(MediaType.TEXT_PLAIN)
+    @NonBlocking
+    public String asyncVertx() {
+    	for (int i = 0; i < 10; i++) {
+    		Vertx.vertx()
+    			.executeBlockingAndForget(Uni
+					.createFrom()
+					.item(this::simularProcessamentoDemorado));
+		}
+    	
+    	log.debug("Thread principal: 1");
+    	log.debug("Thread principal: 2");
+    	log.debug("Thread principal: 3");
+    	
+    	return "OP: Async com Vert.X";
+    }
+    
+    /**
+     * 
+     * @return
+     */
+    @GET
+    @Path("/async-vertx-supplier")
+    @Produces(MediaType.TEXT_PLAIN)
+    @NonBlocking
+    public String asyncVertxSupplier() {
+    	for (int i = 0; i < 10; i++) {
+    		Vertx.vertx()
+    			.executeBlockingAndForget(Uni
+					.createFrom()
+					.item(() -> {
+						simularProcessamentoDemorado();
+						return null;
+					}));
+		}
+    	
+    	log.debug("Thread principal: 1");
+    	log.debug("Thread principal: 2");
+    	log.debug("Thread principal: 3");
+    	
+    	return "OP: Async com Vert.X usando Supplier";
+    }
+    
+    /**
+     * 
      * @param n
      * @throws InterruptedException 
      */
     private final Null simularProcessamentoDemorado() {
         try {
         	log.debug("INICIO - Processamento Demorado");
-        	Thread.sleep(2000);
+        	Thread.sleep(5000);
         	log.debug("FIM - Processamento Demorado");
         	return ObjectUtils.NULL;
     	}
