@@ -5,15 +5,19 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-@Path("/hello")
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@Path("/")
 public class QuarkusSampleController {
     /**
      * 
      * @return
      */
     @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    public String hello() {
-        return "Hello from RESTEasy Reactive";
+    @Path("/sentry")
+    public String logerror() {
+    	log.error("Teste Erro via SLF4J");
+        throw new RuntimeException("Teste Erro via RuntimeException");
     }
 }
