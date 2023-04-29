@@ -3,14 +3,17 @@
  */
 package br.io.otojunior.service;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import io.quarkus.test.junit.QuarkusTest;
-import io.quarkus.test.junit.mockito.InjectMock;
+import io.vertx.core.MultiMap;
 import io.vertx.core.http.HttpServerRequest;
-import jakarta.inject.Inject;
 
 /**
  * @author S014562316
@@ -18,18 +21,16 @@ import jakarta.inject.Inject;
  */
 @QuarkusTest
 class QSampleServiceTest {
-	@InjectMock
-	HttpServerRequest request;
-	
-	@Inject
 	QSampleService service;
 
-	/**
-	 * Test method for {@link br.io.otojunior.service.QSampleService#getXTesteHeader()}.
-	 */
-	@Test
-	void testRequest() {
-		assertNotNull(request);
+	@BeforeEach
+	void setup() {
+		var headers = mock(MultiMap.class);
+		var request = mock(HttpServerRequest.class);
+		this.service = spy(QSampleService.class);
+		when(headers.get("x-teste")).thenReturn("teste123");
+		when(request.headers()).thenReturn(headers);
+		service.request = request;
 	}
 	
 	/**
@@ -37,6 +38,6 @@ class QSampleServiceTest {
 	 */
 	@Test
 	void testGetXTesteHeader() {
-		assertNotNull(service);
+		assertEquals("teste123", service.getXTesteHeader());
 	}
 }
