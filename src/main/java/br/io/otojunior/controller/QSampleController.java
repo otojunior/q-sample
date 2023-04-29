@@ -6,7 +6,7 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
 @Path("/hello")
-public class QuarkusSampleController {
+public class QSampleController {
     /**
      * 
      * @return
