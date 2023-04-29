@@ -3,13 +3,13 @@
  */
 package br.io.otojunior.service;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.Test;
 
 import io.quarkus.test.junit.QuarkusTest;
 import io.quarkus.test.junit.mockito.InjectMock;
-import io.vertx.mutiny.ext.web.RoutingContext;
+import io.vertx.core.http.HttpServerRequest;
 import jakarta.inject.Inject;
 
 /**
@@ -19,10 +19,18 @@ import jakarta.inject.Inject;
 @QuarkusTest
 class QSampleServiceTest {
 	@InjectMock
-	RoutingContext context;
+	HttpServerRequest request;
 	
 	@Inject
 	QSampleService service;
+
+	/**
+	 * Test method for {@link br.io.otojunior.service.QSampleService#getXTesteHeader()}.
+	 */
+	@Test
+	void testRequest() {
+		assertNotNull(request);
+	}
 	
 	/**
 	 * Test method for {@link br.io.otojunior.service.QSampleService#getXTesteHeader()}.

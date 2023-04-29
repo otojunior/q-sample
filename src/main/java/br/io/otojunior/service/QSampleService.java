@@ -3,9 +3,9 @@
  */
 package br.io.otojunior.service;
 
-import io.vertx.mutiny.ext.web.RoutingContext;
+import io.vertx.core.http.HttpServerRequest;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
+import jakarta.ws.rs.core.Context;
 
 /**
  * @author S014562316
@@ -13,10 +13,10 @@ import jakarta.inject.Inject;
  */
 @ApplicationScoped
 public class QSampleService {
-	@Inject
-	RoutingContext context;
+	@Context
+	HttpServerRequest request;
 	
 	public String getXTesteHeader() {
-		return context.request().headers().get("x-teste");
+		return request.headers().get("x-teste");
 	}
 }
